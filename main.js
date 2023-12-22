@@ -3,6 +3,8 @@ const board = document.querySelector("#game-board");
 
 // Define game variables
 let snake = [{x: 10, y: 10}]; // snake's position and size, initial position
+let direction = "right"; // direction of move of the snake
+
 
 /* ============================
 PRINCIPAL FUNCTION
@@ -60,6 +62,39 @@ function generateFood(){
     return { x, y }; // position on the board
 }
 
+/* ============================
+GAME CONTROLS
+=============================*/
+// moving the snake
+function move() {
+    // get the first cube of the snake
+    const snakeHead = {...snake[0]};
+    // direction options of snake
+    switch (direction) {
+        case "right":
+            snakeHead.x++;
+            break;
+        case "left":
+            snakeHead.x--;
+            break;
+        case "up":
+            snakeHead.y--;
+            break;
+        case "down":
+        snakeHead.y++;
+        break;   
+    }
+    // add to the first element into snake array
+    snake.unshift(snakeHead);
+    // remove the path, it means the last value of snake array
+    snake.pop();
+}
 
-// calling principal function 
-draw();
+
+// calling principal function
+/*
+setInterval(() => {
+    move(); // move position
+    draw(); // it needs to draw again the position
+}, 100);
+*/
